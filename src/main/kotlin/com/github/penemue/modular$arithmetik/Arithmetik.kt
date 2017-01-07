@@ -24,10 +24,31 @@ operator fun BigInteger.plus(i: Long) = this + BigInteger.valueOf(i)
 
 operator fun BigInteger.minus(i: Long) = this - BigInteger.valueOf(i)
 
-infix fun BigInteger.mod(m: BigInteger): BigInteger = if (this.isNegative) (this + m) mod m else BarrettReduction.barrettRemainder(this, m)
+infix fun BigInteger.mod(m: BigInteger): BigInteger = if (this.isNegative) (this + m) mod m else BarrettReduction.remainder(this, m)
 
-fun gcd(a: BigInteger, b: BigInteger) = a.gcd(b)
+fun gcd(a: BigInteger, b: BigInteger): BigInteger = a.gcd(b)
 
-infix fun BigInteger.shr(shift: Int) = this.shiftRight(shift)
+infix fun BigInteger.shr(shift: Int): BigInteger = this.shiftRight(shift)
 
-infix fun BigInteger.shl(shift: Int) = this.shiftLeft(shift)
+infix fun BigInteger.shl(shift: Int): BigInteger = this.shiftLeft(shift)
+
+infix fun BigInteger.exp(exp: BigInteger): Exponent {
+    return Exponent(this, exp)
+}
+
+/**
+ * Container of the exponent expression which then should be reduced by the mod infix function
+ */
+data class Exponent(val base: BigInteger, val exp: BigInteger)
+
+infix fun Exponent.mod(m: BigInteger): BigInteger {
+    var result = BigInteger.ONE
+    val expLen = exp.bitLength()
+    for (i in 1..expLen) {
+        result = (result * result) mod m
+        if (exp.testBit(expLen - i)) {
+            result = (result * base) mod m
+        }
+    }
+    return result
+}

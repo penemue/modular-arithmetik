@@ -27,7 +27,7 @@ object BarrettReduction {
     /**
      * @return `n` % `m` using Barrett reduction (https://en.wikipedia.org/wiki/Barrett_reduction)
      */
-    fun barrettRemainder(n: BigInteger, m: BigInteger): BigInteger {
+    fun remainder(n: BigInteger, m: BigInteger): BigInteger {
         val dividendLength = n.bitLength()
         val modLength = m.bitLength()
         if (dividendLength - modLength < 4) {
