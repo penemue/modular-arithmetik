@@ -36,6 +36,14 @@ infix fun BigInteger.exp(exp: BigInteger): Exponent {
     return Exponent(this, exp)
 }
 
+infix fun BigInteger.exp(exp: Long): Exponent {
+    return exp(BigInteger.valueOf(exp))
+}
+
+infix fun BigInteger.exp(exp: Int): Exponent {
+    return exp(exp.toLong())
+}
+
 /**
  * Container of the exponent expression which then should be reduced by the mod infix function
  */
