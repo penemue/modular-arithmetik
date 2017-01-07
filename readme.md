@@ -32,7 +32,7 @@ repeat(Int.MAX_VALUE, {
 You can also express modular exponentiation as `base exp e mod M`. E.g., a variant of the single-stage 
 [Pollard's P - 1 method for integer factorization](https://en.wikipedia.org/wiki/Pollard%27s_p_%E2%88%92_1_algorithm)
 written in Kotlin looks for `N: BigInteger` as follows: 
-```
+```kotlin
 val one = BigInteger.ONE
 var base = BigInteger.TEN
 var product = one
