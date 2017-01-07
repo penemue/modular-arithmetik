@@ -14,6 +14,7 @@ buildscript {
 
 plugins {
     id "com.github.hierynomus.license" version "0.13.1"
+    id "me.champeau.gradle.jmh" version "0.3.1"
 }
 
 group 'com.github.penemue'
@@ -33,6 +34,13 @@ dependencies {
 
 test {
     testLogging.showStandardStreams = true
+}
+
+jmh {
+    jmhVersion = '1.17.3'
+    jvmArgsPrepend '-Xmx1g -Xms1g'
+    duplicateClassesStrategy = 'warn'
+    forceGC = true
 }
 
 license {
