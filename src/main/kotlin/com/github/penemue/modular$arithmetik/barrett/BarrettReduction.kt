@@ -30,20 +30,20 @@ object BarrettReduction {
     fun remainder(n: BigInteger, m: BigInteger): BigInteger {
         val dividendLength = n.bitLength()
         val modLength = m.bitLength()
-        if (dividendLength - modLength < 4) {
-            var result = n
-            while (result >= m) {
-                result -= m
+        var result: BigInteger
+        if (dividendLength - modLength < 3) {
+            result = n
+        } else {
+            var inverse = inverses[m]
+            if (inverse === null) {
+                inverse = (BigInteger.ONE shl (modLength * 2)) / m
+                inverses[m] = inverse
             }
-            return result
+            result = n - (((n shr modLength) * inverse) shr modLength) * m
         }
-        var inverse = inverses[m]
-        if (inverse === null) {
-            inverse = (BigInteger.ONE shl (modLength * 2 + 1)) / m
-            inverses[m] = inverse
+        while (result >= m) {
+            result -= m
         }
-        var result = ((n * inverse) shr (modLength * 2 + 1)) * m
-        result = n - result
-        return if (result >= m) result - m else result
+        return result
     }
 }
