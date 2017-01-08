@@ -33,7 +33,11 @@ dependencies {
 }
 
 test {
-    testLogging.showStandardStreams = true
+    testLogging {
+        showStandardStreams true
+        events "failed"
+        exceptionFormat "short"
+    }
 }
 
 jmh {
