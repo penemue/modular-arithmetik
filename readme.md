@@ -1,7 +1,9 @@
 #Modular Arithmetik
 
-[![GitHub license](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Build Status](https://travis-ci.org/penemue/keap.png?branch=master)](https://travis-ci.org/penemue/modular-arithmetik)
+[![Apache License 2.0](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![Repository Size](https://reposs.herokuapp.com/?path=penemue/modular-arithmetik)
+[![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-orange.svg)](https://kotlinlang.org)
 
 Tiny [Kotlin](https//kotlinlang.org) DSL for [modular arithmetik](https://en.wikipedia.org/wiki/Modular_arithmetic).
 Lets you use math-like notations in number theoretic algorithms: congruence relation `a mod N` instead of
@@ -55,7 +57,7 @@ Modular exponentiation expression does not invoke `BigInteger.modPow()`, it uses
 implementation of exponentiation without divisions using [Barrett reduction](https://en.wikipedia.org/wiki/Barrett_reduction).
 As `BigInteger.modPow()` uses [Montgomery multiplication](https://en.wikipedia.org/wiki/Montgomery_modular_multiplication),
 it's interesting to compare these reduction methods. It can be done implicitly by a benchmark for modular
-exponentiation. For random 2048-bit moduli and 2000-bit exponents, the results are as follows:
+exponentiation. For 2048-bit modulus and 2000-bit exponent (both random), the results are as follows:
 ```
 Benchmark                                      Mode  Cnt   Score   Error  Units
 ModularExponentiationBenchmark.barrettExp     thrpt   20  66.158 ± 0.861  ops/s
@@ -66,9 +68,9 @@ To get benchmark results in your environment, run:
 
     ./gradlew clean jar jmh
     
-Even though current implementation of Barrett reduction is rather ad hoc, modular exponentiation offered by the
-`base exp e mod M` expression seems to be 15-20% faster than the one offered by JDK. This result was repeated for
-random 512-bit and 1024-bit moduli as well.
+Even though current implementation of Barrett reduction is rather ad hoc, modular exponentiation for random modulus
+offered by the `base exp e mod M` expression seems to be 15-20% faster than the one offered by JDK. This result
+was repeated for random 512-bit and 1024-bit moduli as well.
 
 ## References
 
