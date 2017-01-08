@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.penemue.`modular$arithmetik`.barrett
+package com.github.penemue.modulararithmetik.barrett
 
 import org.junit.Assert
 import org.junit.Test

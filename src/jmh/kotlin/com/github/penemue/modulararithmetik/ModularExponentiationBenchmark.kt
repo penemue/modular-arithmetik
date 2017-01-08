@@ -15,9 +15,6 @@
  */
 package com.github.penemue.modulararithmetik
 
-import com.github.penemue.`modular$arithmetik`.exp
-import com.github.penemue.`modular$arithmetik`.mod
-import com.github.penemue.`modular$arithmetik`.plus
 import org.openjdk.jmh.annotations.*
 import org.openjdk.jmh.infra.Blackhole
 import java.math.BigInteger

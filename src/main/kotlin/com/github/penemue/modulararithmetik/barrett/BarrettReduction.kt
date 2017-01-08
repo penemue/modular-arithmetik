@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.penemue.`modular$arithmetik`.barrett
+package com.github.penemue.modulararithmetik.barrett
 
-import com.github.penemue.`modular$arithmetik`.shl
-import com.github.penemue.`modular$arithmetik`.shr
+import com.github.penemue.modulararithmetik.shl
+import com.github.penemue.modulararithmetik.shr
 import java.math.BigInteger
 import java.util.concurrent.ConcurrentHashMap
 

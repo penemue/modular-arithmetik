@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.penemue.`modular$arithmetik`
+package com.github.penemue.modulararithmetik
 
-import com.github.penemue.`modular$arithmetik`.barrett.BarrettReduction
+import com.github.penemue.modulararithmetik.barrett.BarrettReduction
 import java.math.BigInteger
 
 val BigInteger.isNegative: Boolean get() = this.signum() < 0
