@@ -23,18 +23,16 @@ import java.util.concurrent.TimeUnit
 
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.SECONDS)
-open class ModularExponentiationBenchmark {
+abstract class ModularExponentiationBenchmark(private val m: BigInteger) {
 
-    companion object Rnd : Random()
+    protected companion object Rnd : Random()
 
-    // module is a 2048-bit random very probably prime number
-    private val m = BigInteger(2048, 100, Rnd)
-    // exponent is a 2000-bit random number
-    private var exp = BigInteger(2000, Rnd)
+    private var exp: BigInteger = BigInteger.ZERO
 
     @Setup(Level.Invocation)
     fun prepare() {
-        exp += 1
+        // exponent is a random integer with length adjusted to modulus' length
+        exp = BigInteger(m.bitLength() - 1, Rnd)
     }
 
     @Benchmark
@@ -53,3 +51,17 @@ open class ModularExponentiationBenchmark {
         bh.consume(BigInteger.TEN exp exp mod m)
     }
 }
+
+open class RandomModulusExponentiationBenchmark : ModularExponentiationBenchmark(
+        // modulus is a 2048-bit random very probable prime number
+        BigInteger(2048, 100, Rnd))
+
+/**
+ * Exponentiation benchmark modulo F11, the 11th Fermat number (2^2048 + 1)
+ */
+open class FermatModulusExponentiationBenchmark : ModularExponentiationBenchmark((BigInteger.ONE shl 2048) + 1)
+
+/**
+ * Exponentiation benchmark modulo M2053, the 2053rd Mersenne number (2^2053 - 1)
+ */
+open class MersenneModulusExponentiationBenchmark : ModularExponentiationBenchmark((BigInteger.ONE shl 2053) - 1)
