@@ -50,8 +50,10 @@ license {
     ext.year = Calendar.getInstance().get(Calendar.YEAR)
     ext.owner = 'Vyacheslav Lukianov'
     ext.ownerURL = 'https://github.com/penemue'
-    include "**/*.kt"
+    include '**/*.kt'
     mapping {
         kt = 'JAVADOC_STYLE'
     }
 }
+
+defaultTasks 'clean', 'build'
