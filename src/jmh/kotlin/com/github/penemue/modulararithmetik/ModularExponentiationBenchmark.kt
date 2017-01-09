@@ -32,7 +32,7 @@ abstract class ModularExponentiationBenchmark(private val m: BigInteger) {
     @Setup(Level.Invocation)
     fun prepare() {
         // exponent is a random integer with length adjusted to modulus' length
-        exp = BigInteger(m.bitLength() - 1, Rnd)
+        exp = BigInteger(m.bitLength - 1, Rnd)
     }
 
     @Benchmark

@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.penemue.modulararithmetik.barrett
+package com.github.penemue.modulararithmetik
 
 import org.junit.Assert
 import org.junit.Test
 import java.math.BigInteger
 
-class BarrettReductionTest {
+class DivisionTest {
 
     @Test
-    fun barrett() {
+    fun mod() {
         val pi = BigInteger.valueOf(31415926L)
         val e = BigInteger.valueOf(271828L)
-        Assert.assertEquals(pi % e, BarrettReduction.remainder(pi, e))
-        Assert.assertEquals(BigInteger.ONE % e, BarrettReduction.remainder(BigInteger.ONE, e))
-        Assert.assertEquals(BigInteger.TEN % e, BarrettReduction.remainder(BigInteger.TEN, e))
+        Assert.assertEquals(pi % e, ModularDivision.mod(pi, e))
+        Assert.assertEquals(BigInteger.ONE % e, ModularDivision.mod(BigInteger.ONE, e))
+        Assert.assertEquals(BigInteger.TEN % e, ModularDivision.mod(BigInteger.TEN, e))
     }
 }

@@ -15,18 +15,25 @@
  */
 package com.github.penemue.modulararithmetik
 
-import com.github.penemue.modulararithmetik.barrett.BarrettReduction
 import java.math.BigInteger
 
 val BigInteger.isNegative: Boolean get() = this.signum() < 0
+
+val BigInteger.bitLength: Int get() = this.bitLength()
 
 operator fun BigInteger.plus(i: Long) = this + BigInteger.valueOf(i)
 
 operator fun BigInteger.minus(i: Long) = this - BigInteger.valueOf(i)
 
-infix fun BigInteger.mod(m: BigInteger): BigInteger = if (this.isNegative) (this + m) mod m else BarrettReduction.remainder(this, m)
+infix fun BigInteger.mod(m: BigInteger): BigInteger = if (this.isNegative) (this + m) mod m else ModularDivision.mod(this, m)
 
 fun gcd(a: BigInteger, b: BigInteger): BigInteger = a.gcd(b)
+
+infix fun BigInteger.and(that: BigInteger): BigInteger = this.and(that)
+
+infix fun BigInteger.or(that: BigInteger): BigInteger = this.or(that)
+
+infix fun BigInteger.xor(that: BigInteger): BigInteger = this.xor(that)
 
 infix fun BigInteger.shr(shift: Int): BigInteger = this.shiftRight(shift)
 
@@ -51,7 +58,7 @@ data class Exponent(val base: BigInteger, val exp: BigInteger)
 
 infix fun Exponent.mod(m: BigInteger): BigInteger {
     var result = BigInteger.ONE
-    val expLen = exp.bitLength()
+    val expLen = exp.bitLength
     for (i in 1..expLen) {
         result = (result * result) mod m
         if (exp.testBit(expLen - i)) {
