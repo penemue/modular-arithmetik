@@ -18,7 +18,7 @@ package com.github.penemue.modulararithmetik
 import java.math.BigInteger
 import java.util.concurrent.ConcurrentHashMap
 
-internal object ModularDivision {
+object ModularDivision {
 
     private val reductions = ConcurrentHashMap<BigInteger, Reduction>()
 
@@ -42,6 +42,13 @@ internal object ModularDivision {
             reductions[m] = reduction
         }
         return reduction.remainder(n)
+    }
+
+    /**
+     * Clears reductions cache. Is used to make benchmarks more fair.
+     */
+    fun clearReductionsCache() {
+        reductions.clear()
     }
 
     /**
