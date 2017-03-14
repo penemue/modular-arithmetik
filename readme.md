@@ -1,4 +1,4 @@
-#Modular Arithmetik
+# Modular Arithmetik
 
 [![Build Status](https://travis-ci.org/penemue/modular-arithmetik.png?branch=master)](https://travis-ci.org/penemue/modular-arithmetik)
 [![Apache License 2.0](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
