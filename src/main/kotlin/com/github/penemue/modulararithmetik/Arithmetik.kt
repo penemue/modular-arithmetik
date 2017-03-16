@@ -29,6 +29,14 @@ infix fun BigInteger.mod(m: BigInteger): BigInteger = if (this.isNegative) (this
 
 fun gcd(a: BigInteger, b: BigInteger): BigInteger = a.gcd(b)
 
+fun gcd(a: Long, b: BigInteger): BigInteger = b.gcd(BigInteger.valueOf(a))
+
+fun gcd(a: BigInteger, b: Long): BigInteger = a.gcd(BigInteger.valueOf(b))
+
+fun gcd(a: Int, b: BigInteger): BigInteger = gcd(a.toLong(), b)
+
+fun gcd(a: BigInteger, b: Int): BigInteger = gcd(a, b.toLong())
+
 infix fun BigInteger.and(that: BigInteger): BigInteger = this.and(that)
 
 infix fun BigInteger.or(that: BigInteger): BigInteger = this.or(that)
@@ -38,6 +46,18 @@ infix fun BigInteger.xor(that: BigInteger): BigInteger = this.xor(that)
 infix fun BigInteger.shr(shift: Int): BigInteger = this.shiftRight(shift)
 
 infix fun BigInteger.shl(shift: Int): BigInteger = this.shiftLeft(shift)
+
+fun productOf(vararg integers: BigInteger): BigInteger {
+    var result = BigInteger.ONE
+    integers.forEach { result *= it }
+    return result
+}
+
+fun productOf(vararg integers: Int): BigInteger {
+    var result = BigInteger.ONE
+    integers.forEach { result *= BigInteger.valueOf(it.toLong()) }
+    return result
+}
 
 infix fun BigInteger.exp(exp: BigInteger): Exponent {
     return Exponent(this, exp)
