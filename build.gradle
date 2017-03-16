@@ -20,7 +20,6 @@ plugins {
 group 'com.github.penemue'
 version '0.0.1-SNAPSHOT'
 
-
 apply plugin: 'kotlin'
 
 repositories {
@@ -58,6 +57,10 @@ license {
     mapping {
         kt = 'JAVADOC_STYLE'
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
 }
 
 defaultTasks 'clean', 'build'
