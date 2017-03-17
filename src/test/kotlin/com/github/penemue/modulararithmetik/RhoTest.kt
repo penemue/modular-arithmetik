@@ -24,7 +24,7 @@ class RhoTest {
      * Pollard's Monte Carlo *rho*-method for integer factorization applied to F8, the 8th Fermat number.
      * In 1980, a faster version of the algorithm was used to factor F8, and the factorization took 2 hours
      * on Univac 1100/42 ([http://maths-people.anu.edu.au/~brent/pd/rpb061.pdf]).
-     * Nowadays it takes 5-7 seconds on a commodity computer.
+     * Nowadays it takes 1-2 seconds on a commodity computer.
      */
     @Test
     fun factorF8() {
@@ -35,9 +35,9 @@ class RhoTest {
         var product = one
         println("Factoring $F8:")
         repeat(Int.MAX_VALUE, {
-            x1 = x1 * x1 + 7 mod F8
-            x2 = x2 * x2 + 7 mod F8
-            x2 = x2 * x2 + 7 mod F8
+            x1 = x1 * x1 + 151 mod F8
+            x2 = x2 * x2 + 151 mod F8
+            x2 = x2 * x2 + 151 mod F8
             product = product * (x2 - x1 mod F8) mod F8
             if (it % 1000 == 0) {
                 val gcd = gcd(product, F8)
