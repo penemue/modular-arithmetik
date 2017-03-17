@@ -103,7 +103,7 @@ object ModularDivision {
     /**
      * Reduction for modulus in the form 2^k + 1
      */
-    private open class PowerOf2Plus1Reduction(private val m: BigInteger) : Reduction {
+    private class PowerOf2Plus1Reduction(private val m: BigInteger) : Reduction {
 
         private val modLength = m.bitLength - 1
         private val mask = m - 2
@@ -116,7 +116,7 @@ object ModularDivision {
     /**
      * Reduction for modulus in the form 2^k - 1
      */
-    private open class PowerOf2Minus1Reduction(private val m: BigInteger) : Reduction {
+    private class PowerOf2Minus1Reduction(private val m: BigInteger) : Reduction {
 
         private val modLength = m.bitLength
 
