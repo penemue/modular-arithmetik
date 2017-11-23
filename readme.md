@@ -1,7 +1,7 @@
 # Modular Arithmetik
 
 [![Build Status](https://travis-ci.org/penemue/modular-arithmetik.png?branch=master)](https://travis-ci.org/penemue/modular-arithmetik)
-[![Apache License 2.0](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Apache License 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![Repository Size](https://reposs.herokuapp.com/?path=penemue/modular-arithmetik)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-orange.svg)](https://kotlinlang.org)
 
