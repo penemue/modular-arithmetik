@@ -13,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    id "com.github.hierynomus.license" version "0.13.1"
+    id 'com.github.hierynomus.license' version '0.15.0'
     id "me.champeau.gradle.jmh" version "0.3.1"
 }
 
@@ -58,6 +58,11 @@ license {
         kt = 'JAVADOC_STYLE'
     }
 }
+
+task licenseFormatForKotlin(type: com.hierynomus.gradle.license.tasks.LicenseFormat) {
+    source = fileTree(dir: project.projectDir).include("**/*.kt")
+}
+licenseFormat.dependsOn licenseFormatForKotlin
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.3'
