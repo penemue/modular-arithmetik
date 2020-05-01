@@ -8,7 +8,7 @@ Tiny [Kotlin](https//kotlinlang.org) DSL for [modular arithmetik](https://en.wik
 Lets you use math-like notations in number theoretic algorithms: congruence relation `a mod N` instead of
 `a % N` and `gcd(a, b)` instead of `a.gcd(b)`.
 
-E.g., [Pollard's Monte Carlo *rho*-method for integer factorization](https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)
+E.g., [Pollard's Monte Carlo *ρ*-method for integer factorization](https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)
 written in Kotlin looks for `N: BigInteger` as follows:
 ```kotlin
 val one = BigInteger.ONE
