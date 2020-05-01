@@ -69,6 +69,28 @@ infix fun BigInteger.shr(shift: Int): BigInteger = this.shiftRight(shift)
 infix fun BigInteger.shl(shift: Int): BigInteger = this.shiftLeft(shift)
 
 @ArithmeticDsl
+fun sqrt(i: BigInteger): BigInteger {
+    when (i.signum()) {
+        -1 -> throw ArithmeticException("Cannot return imaginary number")
+        0 -> return BigInteger.ZERO
+    }
+    var low = BigInteger.ONE shl (i.bitLength - 1) / 2
+    var up = low shl 1
+    while (low < up) {
+        val mid = (low + up) shr 1
+        when ((mid * mid).compareTo(i)) {
+            0 -> return mid
+            1 -> up = mid
+            -1 -> {
+                if (low == mid) return mid
+                low = mid
+            }
+        }
+    }
+    return low
+}
+
+@ArithmeticDsl
 fun productOf(vararg integers: BigInteger): BigInteger {
     var result = BigInteger.ONE
     integers.forEach { result *= it }
