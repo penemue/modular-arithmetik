@@ -32,7 +32,7 @@ class P_1Test {
         var base = BigInteger.TEN
         var product = one
         println("Factoring $M101:")
-        repeat(Int.MAX_VALUE, {
+        repeat(Int.MAX_VALUE) {
             if (it > 1) {
                 base = base exp it mod M101
                 product = (base - 1) * product mod M101
@@ -44,6 +44,6 @@ class P_1Test {
                     }
                 }
             }
-        })
+        }
     }
 }

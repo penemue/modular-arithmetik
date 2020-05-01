@@ -34,7 +34,7 @@ class RhoTest {
         var x2 = one
         var product = one
         println("Factoring $F8:")
-        repeat(Int.MAX_VALUE, {
+        repeat(Int.MAX_VALUE) {
             x1 = x1 * x1 + 151 mod F8
             x2 = x2 * x2 + 151 mod F8
             x2 = x2 * x2 + 151 mod F8
@@ -46,6 +46,6 @@ class RhoTest {
                     return
                 }
             }
-        })
+        }
     }
 }
