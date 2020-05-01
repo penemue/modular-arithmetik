@@ -15,7 +15,7 @@ val one = BigInteger.ONE
 var x1 = one
 var x2 = one
 var product = one
-repeat(Int.MAX_VALUE, {
+repeat(Int.MAX_VALUE) {
     x1 = x1 * x1 + 2 mod N
     x2 = x2 * x2 + 2 mod N
     x2 = x2 * x2 + 2 mod N
@@ -27,7 +27,7 @@ repeat(Int.MAX_VALUE, {
             return
         }
     }
-})
+}
 ```
 
 You can also express modular exponentiation as `base exp e mod M`. E.g., a variant of the single-stage 
@@ -37,7 +37,7 @@ written in Kotlin looks for `N: BigInteger` as follows:
 val one = BigInteger.ONE
 var base = BigInteger.TEN
 var product = one
-repeat(Int.MAX_VALUE, {
+repeat(Int.MAX_VALUE) {
     if (it > 1) {
         base = base exp it mod N
         product = (base - 1) * product mod N
@@ -49,7 +49,7 @@ repeat(Int.MAX_VALUE, {
             }
         }
     }
-})
+}
 ```
 
 Modular exponentiation expression does not invoke `BigInteger.modPow()`, it uses its own
