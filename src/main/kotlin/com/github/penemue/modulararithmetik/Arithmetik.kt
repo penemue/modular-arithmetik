@@ -17,56 +17,82 @@ package com.github.penemue.modulararithmetik
 
 import java.math.BigInteger
 
-val BigInteger.isNegative: Boolean get() = this.signum() < 0
+@DslMarker
+@Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
+annotation class ArithmeticDsl
 
-val BigInteger.bitLength: Int get() = this.bitLength()
+@ArithmeticDsl
+val BigInteger.isNegative: Boolean
+    get() = this.signum() < 0
 
+@ArithmeticDsl
+val BigInteger.bitLength: Int
+    get() = this.bitLength()
+
+@ArithmeticDsl
 operator fun BigInteger.plus(i: Long) = this + BigInteger.valueOf(i)
 
+@ArithmeticDsl
 operator fun BigInteger.minus(i: Long) = this - BigInteger.valueOf(i)
 
+@ArithmeticDsl
 infix fun BigInteger.mod(m: BigInteger): BigInteger = if (this.isNegative) (this + m) mod m else ModularDivision.mod(this, m)
 
+@ArithmeticDsl
 fun gcd(a: BigInteger, b: BigInteger): BigInteger = a.gcd(b)
 
+@ArithmeticDsl
 fun gcd(a: Long, b: BigInteger): BigInteger = b.gcd(BigInteger.valueOf(a))
 
+@ArithmeticDsl
 fun gcd(a: BigInteger, b: Long): BigInteger = a.gcd(BigInteger.valueOf(b))
 
+@ArithmeticDsl
 fun gcd(a: Int, b: BigInteger): BigInteger = gcd(a.toLong(), b)
 
+@ArithmeticDsl
 fun gcd(a: BigInteger, b: Int): BigInteger = gcd(a, b.toLong())
 
+@ArithmeticDsl
 infix fun BigInteger.and(that: BigInteger): BigInteger = this.and(that)
 
+@ArithmeticDsl
 infix fun BigInteger.or(that: BigInteger): BigInteger = this.or(that)
 
+@ArithmeticDsl
 infix fun BigInteger.xor(that: BigInteger): BigInteger = this.xor(that)
 
+@ArithmeticDsl
 infix fun BigInteger.shr(shift: Int): BigInteger = this.shiftRight(shift)
 
+@ArithmeticDsl
 infix fun BigInteger.shl(shift: Int): BigInteger = this.shiftLeft(shift)
 
+@ArithmeticDsl
 fun productOf(vararg integers: BigInteger): BigInteger {
     var result = BigInteger.ONE
     integers.forEach { result *= it }
     return result
 }
 
+@ArithmeticDsl
 fun productOf(vararg integers: Int): BigInteger {
     var result = BigInteger.ONE
     integers.forEach { result *= BigInteger.valueOf(it.toLong()) }
     return result
 }
 
+@ArithmeticDsl
 infix fun BigInteger.exp(exp: BigInteger): Exponent {
     return Exponent(this, exp)
 }
 
+@ArithmeticDsl
 infix fun BigInteger.exp(exp: Long): Exponent {
     return exp(BigInteger.valueOf(exp))
 }
 
+@ArithmeticDsl
 infix fun BigInteger.exp(exp: Int): Exponent {
     return exp(exp.toLong())
 }
@@ -76,6 +102,7 @@ infix fun BigInteger.exp(exp: Int): Exponent {
  */
 data class Exponent(val base: BigInteger, val exp: BigInteger)
 
+@ArithmeticDsl
 infix fun Exponent.mod(m: BigInteger): BigInteger {
     var result = BigInteger.ONE
     val expLen = exp.bitLength
