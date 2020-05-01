@@ -75,12 +75,12 @@ fun sqrt(i: BigInteger): BigInteger {
         0 -> return BigInteger.ZERO
     }
     var low = BigInteger.ONE shl (i.bitLength - 1) / 2
-    var up = low shl 1
-    while (low < up) {
-        val mid = (low + up) shr 1
+    var high = low shl 1
+    while (low < high) {
+        val mid = (low + high) shr 1
         when ((mid * mid).compareTo(i)) {
             0 -> return mid
-            1 -> up = mid
+            1 -> high = mid
             -1 -> {
                 if (low == mid) return mid
                 low = mid
