@@ -69,6 +69,15 @@ infix fun BigInteger.shr(shift: Int): BigInteger = this.shiftRight(shift)
 infix fun BigInteger.shl(shift: Int): BigInteger = this.shiftLeft(shift)
 
 @ArithmeticDsl
+infix fun BigInteger.inverse_mod(m: BigInteger) = this.modInverse(m)
+
+@ArithmeticDsl
+infix fun Long.inverse_mod(m: BigInteger) = BigInteger.valueOf(this).modInverse(m)
+
+@ArithmeticDsl
+infix fun Int.inverse_mod(m: BigInteger) = this.toLong() inverse_mod m
+
+@ArithmeticDsl
 fun sqrt(i: BigInteger): BigInteger {
     when (i.signum()) {
         -1 -> throw ArithmeticException("Cannot return imaginary number")
