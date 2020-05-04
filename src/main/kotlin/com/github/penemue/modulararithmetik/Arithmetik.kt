@@ -22,12 +22,24 @@ import java.math.BigInteger
 annotation class ArithmeticDsl
 
 @ArithmeticDsl
+val Long.toBigInteger: BigInteger
+    get() = BigInteger.valueOf(this)
+
+@ArithmeticDsl
+val Int.toBigInteger: BigInteger
+    get() = BigInteger.valueOf(this.toLong())
+
+@ArithmeticDsl
 val BigInteger.isNegative: Boolean
     get() = this.signum() < 0
 
 @ArithmeticDsl
 val BigInteger.bitLength: Int
     get() = this.bitLength()
+
+@ArithmeticDsl
+val BigInteger.isZero: Boolean
+    get() = this == BigInteger.ZERO
 
 @ArithmeticDsl
 operator fun BigInteger.plus(i: Long) = this + BigInteger.valueOf(i)
