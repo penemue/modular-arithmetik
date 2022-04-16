@@ -17,6 +17,7 @@ package com.github.penemue.modulararithmetik
 
 import org.junit.Test
 import java.math.BigInteger
+import java.math.BigInteger.ONE
 
 class P_1Test {
 
@@ -27,21 +28,16 @@ class P_1Test {
      */
     @Test
     fun factorM101() {
-        val M101 = (BigInteger.ONE shl 101) - 1
-        val one = BigInteger.ONE
+        val M101 = (ONE shl 101) - 1
         var base = BigInteger.TEN
-        var product = one
         println("Factoring $M101:")
-        repeat(Int.MAX_VALUE) {
-            if (it > 1) {
-                base = base exp it mod M101
-                product = (base - 1) * product mod M101
-                if (it % 10 == 0) {
-                    val gcd = gcd(product, M101)
-                    if (gcd != one) {
-                        println("\nM101 factor found: $gcd, iterations: $it")
-                        return
-                    }
+        (2..Int.MAX_VALUE).forEach {
+            base = base exp it mod M101
+            if (it % 10 == 0) {
+                val gcd = gcd(base - ONE, M101)
+                if (gcd != ONE) {
+                    println("\nM101 factor found: $gcd, iterations: $it")
+                    return
                 }
             }
         }
