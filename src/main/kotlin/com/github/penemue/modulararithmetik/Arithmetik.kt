@@ -90,25 +90,34 @@ infix fun Long.inverse_mod(m: BigInteger) = BigInteger.valueOf(this).modInverse(
 infix fun Int.inverse_mod(m: BigInteger) = this.toLong() inverse_mod m
 
 @ArithmeticDsl
+fun binarySearch(low: BigInteger, high: BigInteger, middleComparator: (BigInteger) -> Int): BigInteger {
+    var l = low
+    var h = high
+    while (l < h) {
+        val mid = (l + h) shr 1
+        when (middleComparator(mid)) {
+            0 -> return mid
+            1 -> h = mid
+            -1 -> {
+                if (l == mid) return mid
+                l = mid
+            }
+        }
+    }
+    return l
+}
+
+@ArithmeticDsl
 fun sqrt(i: BigInteger): BigInteger {
     when (i.signum()) {
         -1 -> throw ArithmeticException("Cannot return imaginary number")
         0 -> return BigInteger.ZERO
     }
-    var low = BigInteger.ONE shl (i.bitLength - 1) / 2
-    var high = low shl 1
-    while (low < high) {
-        val mid = (low + high) shr 1
-        when ((mid * mid).compareTo(i)) {
-            0 -> return mid
-            1 -> high = mid
-            -1 -> {
-                if (low == mid) return mid
-                low = mid
-            }
+    (BigInteger.ONE shl (i.bitLength - 1) / 2).let { low ->
+        return binarySearch(low, low shl 1) { mid ->
+            (mid * mid).compareTo(i)
         }
     }
-    return low
 }
 
 @ArithmeticDsl
