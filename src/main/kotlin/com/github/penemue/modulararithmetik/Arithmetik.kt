@@ -16,6 +16,7 @@
 package com.github.penemue.modulararithmetik
 
 import java.math.BigInteger
+import java.math.BigInteger.ONE
 
 @DslMarker
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
@@ -92,7 +93,7 @@ infix fun Int.inverse_mod(m: BigInteger) = this.toLong() inverse_mod m
 @ArithmeticDsl
 fun binarySearch(low: BigInteger, high: BigInteger, middleComparator: (BigInteger) -> Int): BigInteger {
     var l = low
-    var h = high
+    var h = high + ONE
     while (l < h) {
         val mid = (l + h) shr 1
         when (middleComparator(mid)) {
