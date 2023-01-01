@@ -15,8 +15,14 @@
  */
 package com.github.penemue.primes
 
+import com.github.penemue.modulararithmetik.ArithmeticDsl
+import com.github.penemue.modulararithmetik.bitLength
+import com.github.penemue.modulararithmetik.toBigInteger
+import java.math.BigInteger
+import java.math.BigInteger.ONE
 import java.util.*
 
+@ArithmeticDsl
 fun first1MPrimes(): Iterable<Int> = Iterable {
     object : Iterator<Int> {
 
@@ -30,6 +36,26 @@ fun first1MPrimes(): Iterable<Int> = Iterable {
             }
         }
     }
+}
+
+@ArithmeticDsl
+fun getSmoothInteger(bits: Int): BigInteger {
+    var result = ONE
+    val exponents = HashMap<Int, Int>()
+    for (prime in first1MPrimes()) {
+        result *= prime.toBigInteger
+        exponents.entries.toList().forEach { (i, exp) ->
+            if (exp * i < prime / 2) {
+                exponents[i] = exp * i
+                result *= i.toBigInteger
+            }
+        }
+        exponents[prime] = prime
+        if (result.bitLength >= bits) {
+            break
+        }
+    }
+    return result
 }
 
 // sieving 1 million of odd primes
