@@ -3,7 +3,7 @@ buildscript {
     ext.kotlinLangVersion = '1.6'
     ext.junitVersion = '4.13'
     ext.licensePluginVersion = '0.15.0'
-    ext.jmhPlugin= '0.5.0'
+    ext.jmhPlugin = '0.5.3'
 
     repositories {
         mavenCentral()
