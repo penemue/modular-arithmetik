@@ -3,7 +3,7 @@
 [![Apache License 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-orange.svg)](https://kotlinlang.org)
 
-Tiny [Kotlin](https//kotlinlang.org) DSL for [modular arithmetik](https://en.wikipedia.org/wiki/Modular_arithmetic).
+Tiny [Kotlin](https://kotlinlang.org) DSL for [modular arithmetik](https://en.wikipedia.org/wiki/Modular_arithmetic).
 Lets you use math-like notations in number theoretic algorithms: congruence relation `a mod N` instead of
 `a % N` and `gcd(a, b)` instead of `a.gcd(b)`.
 
