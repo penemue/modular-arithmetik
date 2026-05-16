@@ -3,12 +3,12 @@
 [![Apache License 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Pure Kotlin](https://img.shields.io/badge/100%25-kotlin-orange.svg)](https://kotlinlang.org)
 
-Tiny [Kotlin](https://kotlinlang.org) DSL for [modular arithmetik](https://en.wikipedia.org/wiki/Modular_arithmetic).
-Lets you use math-like notations in number theoretic algorithms: congruence relation `a mod N` instead of
-`a % N` and `gcd(a, b)` instead of `a.gcd(b)`.
+Tiny [Kotlin](https://kotlinlang.org) DSL for [modular arithmetic](https://en.wikipedia.org/wiki/Modular_arithmetic).
+Lets you use math-like notation in number-theoretic algorithms: modular reduction `a mod N` instead of
+`a % N`, and `gcd(a, b)` instead of `a.gcd(b)`.
 
-E.g., [Pollard's Monte Carlo *ρ*-method for integer factorization](https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)
-written in Kotlin looks for `N: BigInteger` as follows:
+For example, [Pollard's *ρ*-algorithm for integer factorization](https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm)
+looks for a factor of `N: BigInteger` as follows:
 ```kotlin
 val one = BigInteger.ONE
 var x1 = one
@@ -22,16 +22,16 @@ repeat(Int.MAX_VALUE) {
     if (it % 1000 == 0) {
         val gcd = gcd(product, N)
         if (gcd != one) {
-            println("\Factor found: $gcd, iterations: $it")
+            println("\nFactor found: $gcd, iterations: $it")
             return
         }
     }
 }
 ```
 
-You can also express modular exponentiation as `base exp e mod M`. E.g., a variant of the single-stage 
-[Pollard's P - 1 method for integer factorization](https://en.wikipedia.org/wiki/Pollard%27s_p_%E2%88%92_1_algorithm)
-written in Kotlin looks for `N: BigInteger` as follows: 
+Modular exponentiation can also be expressed as `base exp e mod M`. For example, a variant of the single-stage
+[Pollard's P − 1 method for integer factorization](https://en.wikipedia.org/wiki/Pollard%27s_p_%E2%88%92_1_algorithm)
+looks for a factor of `N: BigInteger` as follows:
 ```kotlin
 val one = BigInteger.ONE
 var base = BigInteger.TEN
@@ -51,11 +51,11 @@ repeat(Int.MAX_VALUE) {
 }
 ```
 
-Modular exponentiation expression does not invoke `BigInteger.modPow()`, it uses its own
-implementation of exponentiation without divisions using [Barrett reduction](https://en.wikipedia.org/wiki/Barrett_reduction).
-As `BigInteger.modPow()` uses [Montgomery multiplication](https://en.wikipedia.org/wiki/Montgomery_modular_multiplication),
-it's interesting to compare these reduction methods. It can be done implicitly by a benchmark for modular
-exponentiation. For 2048-bit modulus and 2000-bit exponent (both random), the results are as follows:
+The modular exponentiation expression does not invoke `BigInteger.modPow()`; it uses its own
+implementation of exponentiation without divisions, based on [Barrett reduction](https://en.wikipedia.org/wiki/Barrett_reduction).
+Since `BigInteger.modPow()` uses [Montgomery multiplication](https://en.wikipedia.org/wiki/Montgomery_modular_multiplication),
+it is interesting to compare these reduction methods. This can be done implicitly via a benchmark for modular
+exponentiation. For a 2048-bit modulus and a 2000-bit exponent (both random), the results are as follows:
 ```
 Benchmark                                      Mode  Cnt   Score   Error  Units
 ModularExponentiationBenchmark.barrettExp     thrpt   20  66.158 ± 0.861  ops/s
@@ -64,11 +64,13 @@ ModularExponentiationBenchmark.montgomeryExp  thrpt   20  55.026 ± 2.122  ops/s
 
 To get benchmark results in your environment, run:
 
-    ./gradlew clean jar jmh
-    
-Even though current implementation of Barrett reduction is rather ad hoc, modular exponentiation for random modulus
-offered by the `base exp e mod M` expression seems to be 15-20% faster than the one offered by JDK. This result
-was repeated for random 512-bit and 1024-bit moduli as well.
+```bash
+./gradlew clean jar jmh
+```
+
+Even though the current implementation of Barrett reduction is rather ad hoc, the `base exp e mod M` expression
+appears to be 15–20% faster than JDK's `modPow` for random moduli. The same holds for random 512-bit and
+1024-bit moduli.
 
 ## References
 
